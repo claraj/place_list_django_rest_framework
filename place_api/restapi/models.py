@@ -20,4 +20,4 @@ class Place(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} starred: {self.isStarred} created on {self.dateCreated} belongs to {self.user}'
+        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} starred: {self.isStarred} created on {self.dateAdded} belongs to {self.user}'

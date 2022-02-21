@@ -1,12 +1,13 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from django.utils import timezone
 
 class Place(models.Model):
     user = models.ForeignKey('auth.User', blank=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=False, null=False)
     reason = models.CharField(max_length=200, blank=True, null=True)  # reason not required
-    priority = models.IntegerField(validators=[MinValueValidator(0)])
+    isStarred = models.BooleanField(default=False, null=False)
+    dateCreated = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = [ ['user', 'name' ] ]
@@ -19,4 +20,4 @@ class Place(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} rating: {self.priority} belongs to {self.user}'
+        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} starred: {self.isStarred} created on {self.dateCreated} belongs to {self.user}'

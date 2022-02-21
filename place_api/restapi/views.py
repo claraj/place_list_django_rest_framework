@@ -22,17 +22,24 @@ class PlaceViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Place.objects.filter(user=self.request.user).order_by('priority')
+        return Place.objects.filter(user=self.request.user).order_by('name')
 
     def create(self, request):
-        if request.method != POST:
+        if request.method != 'POST':
             return Response("Wrong method")
         try:
             print('creating', request.data)
-            place_ = Place(name=request.data.get('name'), reason=request.data.get('reason'), priority=request.data.get('priority'), user=request.user)
-            place_.full_clean()
-            place_.save()
-            return Response(PlaceSerializer(place_).data, status=status.HTTP_201_CREATED)
+
+            serializer = PlaceSerializer(data=request.data, many=True)
+            if serializer.is_valid():
+                serializer.save()
+            # place_ = Place(name=request.data.get('name'), reason=request.data.get('reason'), priority=request.data.get('priority'), user=request.user)
+            # place_.full_clean()
+            # place_.save()
+                return Response({'success': 'created'}, status=status.HTTP_201_CREATED)
+            else:
+                return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
+                
         except ValidationError as e:
             print('Invalid request, validation error ' + str(e))
             return Response({'error': 'Invalid data. Place name must be unique. Priority must be positive'}, status=status.HTTP_400_BAD_REQUEST)

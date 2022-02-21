@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 class Place(models.Model):
     user = models.ForeignKey('auth.User', blank=False, on_delete=models.CASCADE)

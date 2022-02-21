@@ -1,4 +1,4 @@
-## Movie API 
+## Place API 
 
 ### How to run locally 
 
@@ -30,11 +30,11 @@ Press Control+C to stop the server.
 
 ### Example API calls
 
-GET http://127.0.0.1:8080/api/movies/   **Get all movies**  
-GET http://127.0.0.1:8080/api/movies/1/   **Get movie with ID 1**  
-POST http://127.0.0.1:8080/api/movies/   **Create a new movie**  
-PATCH http://127.0.0.1:8080/api/movies/1/   **Edit movie 1**   
-DELETE http://127.0.0.1:8080/api/movies/1/   **Delete movie 1**   
+GET http://127.0.0.1:8080/api/places/   **Get all places**  
+GET http://127.0.0.1:8080/api/places/1/   **Get place with ID 1**  
+POST http://127.0.0.1:8080/api/places/   **Create a new place**  
+PATCH http://127.0.0.1:8080/api/places/1/   **Edit place 1**   
+DELETE http://127.0.0.1:8080/api/places/1/   **Delete place 1**   
 
 The trailing slashes for POST, PATCH are important otherwise the API server will redirect to GET requests. 
 
@@ -48,24 +48,24 @@ Example code using requests, which is entirely lacking in validation, exception 
 import os 
 import requests 
 
-base_url = 'http://127.0.0.1:8000/api/movies/'
+base_url = 'http://127.0.0.1:8000/api/places/'
 
 key = os.environ.get('MOVIE_API_KEY_LOCAL')  # Set an environment variable
 
-# A user's movies must have unique names. Movie ratings are out of 5
+# A user's places must have unique names. Place ratings are out of 5
 
 auth_header = {'Authorization': 'Token ' + key }
-movie = {'name': 'Wonder Woman', 'rating': 4}
+place = {'name': 'Wonder Woman', 'rating': 4}
 
-response = requests.post(base_url, data=movie, headers=auth_header)
+response = requests.post(base_url, data=place, headers=auth_header)
 wonder_woman = response.json()
 wonder_woman_id = wonder_woman['id']
-print('Added movie', response.status_code, wonder_woman)  # expect 200, movie JSON including ID assigned by server 
+print('Added place', response.status_code, wonder_woman)  # expect 200, place JSON including ID assigned by server 
 
-movie = {'name': 'Batman', 'rating': 3}
-response = requests.post(base_url, data=movie, headers=auth_header)
+place = {'name': 'Batman', 'rating': 3}
+response = requests.post(base_url, data=place, headers=auth_header)
 batman = response.json()
-print('Added movie', batman)
+print('Added place', batman)
 
 # Patch - update Batman 
 batman_id = batman['id']
@@ -74,13 +74,13 @@ print('After update', response.json())
 
 # Get Batman - get one 
 response = requests.patch(f'{base_url}{batman_id}/', headers=auth_header)
-movie = response.json()
-print('Get one', movie)
+place = response.json()
+print('Get one', place)
 
 # Get all 
 response = requests.get(base_url, headers=auth_header)
-movies = response.json()
-print('Get all', movies)
+places = response.json()
+print('Get all', places)
 
 # Delete Batman 
 response = requests.delete(f'{base_url}{batman_id}/', headers=auth_header)

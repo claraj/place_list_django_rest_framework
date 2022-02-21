@@ -25,7 +25,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
     def create(self, request):
         try:
             print('creating', request.data)
-            place_ = Place(name=request.data['name'], reason=request.data['reason'], priority=request.data['priority'], user=request.user)
+            place_ = Place(name=request.data.get('name'), reason=request.data.get('reason'), priority=request.data.get('priority'), user=request.user)
             place_.full_clean()
             place_.save()
             return Response(PlaceSerializer(place_).data, status=status.HTTP_201_CREATED)
@@ -33,5 +33,8 @@ class PlaceViewSet(viewsets.ModelViewSet):
             print('Invalid request, validation error ' + str(e))
             return Response({'error': 'Invalid data. Place name must be unique. Priority must be positive'}, status=status.HTTP_400_BAD_REQUEST)
         except IntegrityError as e:
-            print('Ivnavlid request, ntegrity error ' + str(e))
+            print('Invalid request, integrity error ' + str(e))
+            return Response({'error': 'Invalid data. Place name must be unique. Rating must be between 0 and 5.'}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print('Invalid request' + str(e))
             return Response({'error': 'Invalid data. Place name must be unique. Rating must be between 0 and 5.'}, status=status.HTTP_400_BAD_REQUEST)

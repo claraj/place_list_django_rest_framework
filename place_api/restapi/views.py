@@ -42,13 +42,13 @@ class PlaceViewSet(viewsets.ModelViewSet):
                 
         except ValidationError as e:
             print('Invalid request, validation error ' + str(e))
-            return Response({'error': 'Invalid data. Place name must be unique. Priority must be positive'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid data. Place name must be unique.'}, status=status.HTTP_400_BAD_REQUEST)
         except IntegrityError as e:
             print('Invalid request, integrity error ' + str(e))
-            return Response({'error': 'Invalid data. Place name must be unique. Rating must be between 0 and 5.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid data. Place name must be unique.'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             print('Invalid request' + str(e))
-            return Response({'error': 'Invalid data. Place name must be unique. Rating must be between 0 and 5.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid data. Place name must be unique.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # TODO 

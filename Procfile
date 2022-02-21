@@ -1,2 +1,2 @@
-web: gunicorn movieapi.wsgi
+web: gunicorn place_api.wsgi
 release: python manage.py migrate

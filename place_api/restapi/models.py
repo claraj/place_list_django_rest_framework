@@ -7,7 +7,7 @@ class Place(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     reason = models.CharField(max_length=200, blank=True, null=True)  # reason not required
     isStarred = models.BooleanField(default=False, null=False)
-    dateCreated = models.DateTimeField(default=timezone.now)
+    dateAdded = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = [ ['user', 'name' ] ]

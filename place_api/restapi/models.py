@@ -15,8 +15,9 @@ class Place(models.Model):
 
     
     def save(self, *args, **kwargs):
-        if Place.objects.filter(user=self.user).filter(name__iexact=self.name).first():
-            raise ValidationError(f'Duplicate place name {self.name}')
+        if not self.id: # no ID so new object, not updating an existing object 
+            if Place.objects.filter(user=self.user).filter(name__iexact=self.name).first():
+                raise ValidationError(f'Duplicate place name {self.name}')
 
         super().save(*args, **kwargs)
 

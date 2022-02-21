@@ -7,7 +7,7 @@ class Place(models.Model):
     user = models.ForeignKey('auth.User', blank=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=False, null=False)
     reason = models.CharField(max_length=200, blank=True, null=True)  # reason not required
-    isStarred = models.BooleanField(default=False, null=False)
+    starred = models.BooleanField(default=False, null=False)
     dateAdded = models.DateTimeField(default=timezone.now)
 
     class Meta:
@@ -21,4 +21,4 @@ class Place(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} starred: {self.isStarred} created on {self.dateAdded} belongs to {self.user}'
+        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} starred: {self.starred} created on {self.dateAdded} belongs to {self.user}'

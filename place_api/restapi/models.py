@@ -8,7 +8,7 @@ class Place(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     reason = models.CharField(max_length=200, blank=True, null=True)  # reason not required
     starred = models.BooleanField(default=False, null=False)
-    dateAdded = models.DateTimeField(default=timezone.now)
+    # dateAdded = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = [ ['user', 'name' ] ]
@@ -22,4 +22,4 @@ class Place(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} starred: {self.starred} created on {self.dateAdded} belongs to {self.user}'
+        return f'Place {self.id}. Name: {self.name} reason: {self.reason or "no reason"} starred: {self.starred}  belongs to {self.user}'

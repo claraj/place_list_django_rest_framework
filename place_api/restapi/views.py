@@ -38,7 +38,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
             # place_.save()
                 return Response({'success': 'created'}, status=status.HTTP_201_CREATED)
             else:
-                return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': f'Invalid data {serializer.errors}'}, status=status.HTTP_400_BAD_REQUEST)
                 
         except ValidationError as e:
             print('Invalid request, validation error ' + str(e))

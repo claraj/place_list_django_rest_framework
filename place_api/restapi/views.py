@@ -30,7 +30,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
         try:
             print('creating', request.data)
 
-            serializer = PlaceSerializer(data=request.data, many=True)
+            serializer = PlaceSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
             # place_ = Place(name=request.data.get('name'), reason=request.data.get('reason'), priority=request.data.get('priority'), user=request.user)

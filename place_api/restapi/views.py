@@ -38,7 +38,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
             # place_ = Place(name=request.data.get('name'), reason=request.data.get('reason'), priority=request.data.get('priority'), user=request.user)
             # place_.full_clean()
             # place_.save()
-                return Response({'success': 'created'}, status=status.HTTP_201_CREATED)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
                 return Response({'error': f'Invalid data {serializer.errors}'}, status=status.HTTP_400_BAD_REQUEST)
                 

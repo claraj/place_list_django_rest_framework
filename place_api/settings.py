@@ -92,18 +92,28 @@ WSGI_APPLICATION = 'place_api.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
-if 'ON_HEROKU' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-    }
-
-else: 
+if 'LOCAL_DJANGO' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+
+else:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'places',
+            'USER': 'claraj',
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': 'claraj.mysql.pythonanywhere-services.com',
+            'PORT': '3306',
+        }
+    }
+
+
 
 
 # Password validation

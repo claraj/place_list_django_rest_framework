@@ -1,6 +1,9 @@
 import os 
 import requests 
 
+
+# HAVE YOU HEARD OF UNIT TESTS????
+
 base_url = 'http://127.0.0.1:8000/api/places/'
 
 

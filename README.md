@@ -42,6 +42,6 @@ POST and PATCH requests should include the relevant data as JSON
 
 All requests require an authorization header containing your key in this form `Authorization: Token 123456787234567871234567876543`
 
-Example code using requests, which is entirely lacking in validation, exception handling etc. which you would, of course, add in a real app. 
+ 
 
 

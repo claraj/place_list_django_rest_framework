@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -101,7 +100,6 @@ if 'LOCAL_DJANGO' in os.environ:
     }
 
 else:
-
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -156,8 +154,3 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 # Rest framework auth config
-
-# Django database settings for Heroku
-if os.environ.get('HEROKU'):
-    import django_heroku
-    django_heroku.settings(locals())

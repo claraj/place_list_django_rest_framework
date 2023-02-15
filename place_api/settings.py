@@ -107,7 +107,7 @@ else:
             'USER': 'claraj',
             'PASSWORD': os.environ.get('DB_PASSWORD'),
             'HOST': 'claraj.mysql.pythonanywhere-services.com',
-            'PORT': '3306',
+            # 'PORT': '3306',
         }
     }
 

@@ -103,7 +103,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'places',
+            'NAME': 'claraj$places',
             'USER': 'claraj',
             'PASSWORD': os.environ.get('DB_PASSWORD'),
             'HOST': 'claraj.mysql.pythonanywhere-services.com',
